@@ -59,7 +59,7 @@ app.post("/weatherData", async (req, res) => {
 
   const city = req.body.cityInput; //takes city name from input posted
   console.log(city); //check city input on console
-  const apiKey = "45dc06b81aca5bac767490cf4ed526ad";
+  const apiKey = process.env.API_KEY;
 
   try {
           // Step 1: Get logitude and latitude and city name + country
