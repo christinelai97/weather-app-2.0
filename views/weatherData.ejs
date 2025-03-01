@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="body_container">
+        <div class="section_container">
+            <div class="heading1_container">
+                <h1>currentWeather.</h1>
+
+                <div class="form_div">
+                    <form class="form_item" action="/weatherData" method="POST">
+                        <div class="search_bar">
+                            <input type="text" name="cityInput" placeholder="Enter city name" required>
+                            <button type="submit">Search</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="section_container">
+
+            <% if (hourlyForecast) { %>
+
+                <div class="current_forecast_container">
+
+                    <h1>
+                        <%= cityName %>
+                    </h1>
+
+                    <h4>
+                        <%= currentDay %>
+                    </h4>
+
+                    <div class="current_forecast_items">
+
+                        <div class="current_forecast_item left">
+                            <div class="current_forecast_img">
+                                <img class="current_forecast_icon"
+                                    src="https://openweathermap.org/img/wn/<%= currentIcon %>@2x.png" alt="">
+                            </div>
+
+                            <div class="current_forecast_temperature">
+                                <h3><%= currentTemp %>°</h3>
+                                <p><%= currentDescription %></p>
+                            </div>
+
+
+                        </div>
+
+                        <div class="current_forecast_item right">
+
+                            <div class="forecast_item_detail">
+                            <p><%= currentTempMax %>°</p>
+                            <p class="forecast-item-title">High</p>
+                            </div>
+
+                            <div class="forecast_item_detail">
+                            <p><%= currentWind %></p>
+                            <p class="forecast-item-title">Wind</p>
+                            </div>
+
+                            <div class="forecast_item_detail"> 
+                            <p><%= currentSunrise %></p>
+                            <p class="forecast-item-title">Sunrise</p>
+                            </div>
+
+                            <div class="forecast_item_detail">
+                            <p><%= currentTempMin %>°</p>
+                            <p class="forecast-item-title">Low</p>
+                            </div>
+
+                            <div class="forecast_item_detail">
+                            <p><%= currentUVI %></p>
+                            <p class="forecast-item-title">UV</p>
+                            </div>
+
+                            <div class="forecast_item_detail">
+                            <p><%= currentSunset %></p>
+                            <p class="forecast-item-title">Sunset</p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- HOURLY FORECAST -->
+        <div class="section_container">
+
+            <div class="hourly_forecast_container">
+
+                <h2>Hourly</h2>
+
+                <div class="hourly_forecast_items">
+
+                    <% hourlyForecast.forEach((hour)=> { %>
+                        <div class="hourly_forecast_item">
+                            <p>
+                                <%= hour.time %>
+                            </p>
+                            <img src="<%= hour.icon %>" alt="">
+                            <p>
+                                <%= hour.temperature %>°
+                            </p>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7-DAY FORECAST -->
+        <div class="section_container">
+
+            <div class="weekly_forecast_container">
+
+                <h2>7-day forecast</h2>
+
+                <div class="weekly_forecast_items">
+
+                    <% weeklyForecast.forEach((day)=> { %>
+                        <div class="weekly_forecast_item">
+                            <p class="weekly_forecast_date">
+                                <%= day.weekday %>
+                            </p>
+                            <img class="weekly_forecast_img" src="<%= day.icon %>" alt="">
+
+                            <div class="weekly_forecast_highlow">
+                                <p>L: <%= day.low %>°</p>
+                                <p>H: <%= day.high %>°</p>
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <% } %>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
